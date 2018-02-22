@@ -28,6 +28,14 @@ import fr.epita.iam.services.configuration.ConfigurationService;
  */
 public class Logger {
 
+	/**
+	 * 
+	 */
+	private static final String OS_NAME = "os.name";
+	/**
+	 * 
+	 */
+	private static final String USER_HOME = "user.home";
 	private static final String LOGGER_PATH = "\\.iam-core\\application.log";
 	private static PrintWriter pw;
 	private final Class<?> cls;
@@ -116,14 +124,14 @@ public class Logger {
 		// if path is not provided, the logger is created in the home directory
 		// (iam-core\application.log)
 		if (path.isEmpty()) {
-			String os = System.getProperty("os.name").toLowerCase();
+			String os = System.getProperty(OS_NAME).toLowerCase();
 
 			if (os.indexOf("win") >= 0) {
-				path = System.getProperty("user.home") + LOGGER_PATH;
+				path = System.getProperty(USER_HOME) + LOGGER_PATH;
 			} else if (os.indexOf("mac") >= 0) {
-				path = System.getProperty("user.home") + File.separator + "Documents" + LOGGER_PATH;
+				path = System.getProperty(USER_HOME) + File.separator + "Documents" + LOGGER_PATH;
 			} else if (os.indexOf("nix") >= 0 || os.indexOf("nux") >= 0 || os.indexOf("aix") > 0) {
-				path = System.getProperty("user.home") + LOGGER_PATH;
+				path = System.getProperty(USER_HOME) + LOGGER_PATH;
 			}
 		}
 
